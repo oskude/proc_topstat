@@ -1,0 +1,33 @@
+_pkgbase=proc_topstat
+pkgname=proc_topstat-dkms
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Simple system stats in /proc/topstat"
+arch=('i686' 'x86_64')
+url="https://github.com/oskude/proc_topstat"
+license=('GPL2')
+depends=('dkms')
+conflicts=("${_pkgbase}")
+source=(
+	"git+file:///$(readlink -f ../..)/"
+	"dkms.conf"
+)
+md5sums=(
+	'SKIP'
+	'SKIP'
+)
+
+package() {
+	install -Dm644 dkms.conf\
+		"${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/dkms.conf
+	sed -e "s/@_PKGBASE@/${_pkgbase}/" \
+		-e "s/@PKGVER@/${pkgver}/" \
+		-i "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/dkms.conf
+
+	install -Dm644 "${_pkgbase}/proc_topstat.c"\
+		"${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/proc_topstat.c
+	install -Dm644 "${_pkgbase}/Kbuild"\
+		"${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/Kbuild
+	install -Dm644 "${_pkgbase}/makefile"\
+		"${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/makefile
+}
