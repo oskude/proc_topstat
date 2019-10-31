@@ -20,13 +20,13 @@ cpu <total> <used>
 ```
 
 - _line number_ implies cpu number.
-- `<total>` total _jiffies_ elapsed.
+- `<total>` _jiffies_ elapsed.
 - `<used>` amount of `<total>` in use by programs, that cannot be used by other programs.
 
 ```
 mem <total> <used> <cached>
 ```
 
-- `<total>` total kilobytes of memory.
+- `<total>` kilobytes of memory.
 - `<used>` amount of `<total>` in use by programs, that can not be used by other programs.
 - `<cached>` amount of `<used>` in use for caches, that can be freed by user.
