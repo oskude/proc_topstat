@@ -167,12 +167,11 @@ static int me_open(struct inode *inodep, struct file *filep)
 	return single_open(filep, me_show, NULL);
 }
 
-static struct file_operations fops = {
-	.owner   = THIS_MODULE,
-	.open    = me_open,
-	.read    = seq_read,
-	.llseek  = seq_lseek,
-	.release = single_release,
+static const struct proc_ops fops = {
+	.proc_open    = me_open,
+	.proc_read    = seq_read,
+	.proc_lseek   = seq_lseek,
+	.proc_release = single_release,
 };
 
 /* kernel module *************************************************************/
